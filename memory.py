@@ -8,6 +8,7 @@ pygame.display.set_caption("Memory")
 DISPLAY = pygame.display.set_mode(SCREEN)
 
 #Define objects and generate number grid
+LETRAS = 'ABCDE'
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 RED = (255, 0, 0)
@@ -105,6 +106,9 @@ while True:
     for i in range(ROWS):
         for j in range(COLS):
             pygame.draw.rect(DISPLAY, (255, 255, 255), CARD_GRID[i][j])
+            text = LETRAS[j] + str(i + 1)
+            render = ARIAL_35.render(text, True, BLACK)
+            DISPLAY.blit(render, (CARD_GRID[i][j].x + CARD_HOR_PAD - 10, CARD_GRID[i][j].y + CARD_VER_PAD + 10))
             
     #Draw numbers
     if exposed:
