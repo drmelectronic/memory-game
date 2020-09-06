@@ -1,7 +1,7 @@
 #Load modules and initialize display
 import os, random, time, pygame
 pygame.init()
-SCREEN = (700,450)
+SCREEN = (700, 450)
 ICON = pygame.image.load(os.path.join("memory.png"))
 pygame.display.set_icon(ICON)
 pygame.display.set_caption("Memory")
@@ -25,6 +25,18 @@ COLS = 5
 cards = [i for i in range(10) for j in range(2)]
 random.shuffle(cards)
 CARD_VAL_GRID = [cards[i*len(cards) // ROWS:(i+1)*len(cards) // ROWS] for i in range(ROWS)]
+IMAGES = [
+    'tiles/100/abraham.png',
+    'tiles/100/daniel.png',
+    'tiles/100/david.png',
+    'tiles/100/elias.png',
+    'tiles/100/gedeon.png',
+    'tiles/100/jose.png',
+    'tiles/100/josue.png',
+    'tiles/100/moises.png',
+    'tiles/100/noe.png',
+    'tiles/100/sanson.png',
+]
 CARD_GRID = [[] for i in range(ROWS)]
 for i in range(ROWS):
     if i == 0:
@@ -97,21 +109,30 @@ while True:
     #Draw numbers
     if exposed:
         for i in exposed:
-            text = str(CARD_VAL_GRID[i[0]][i[1]])
-            render = ARIAL_50.render(text, True, BLACK)
-            DISPLAY.blit(render, (CARD_GRID[i[0]][i[1]].x + CARD_HOR_PAD, CARD_GRID[i[0]][i[1]].y + CARD_VER_PAD))
+            filename = IMAGES[CARD_VAL_GRID[i[0]][i[1]]]
+            image = pygame.image.load(filename)
+            DISPLAY.blit(image, (CARD_GRID[i[0]][i[1]].x, CARD_GRID[i[0]][i[1]].y))
+            # text = str(CARD_VAL_GRID[i[0]][i[1]])
+            # render = ARIAL_50.render(text, True, BLACK)
+            # DISPLAY.blit(render, (CARD_GRID[i[0]][i[1]].x + CARD_HOR_PAD, CARD_GRID[i[0]][i[1]].y + CARD_VER_PAD))
 
     if matched:
         for i in matched:
-            text = str(CARD_VAL_GRID[i[0]][i[1]])
-            render = ARIAL_50.render(text, True, GREEN)
-            DISPLAY.blit(render, (CARD_GRID[i[0]][i[1]].x + CARD_HOR_PAD, CARD_GRID[i[0]][i[1]].y + CARD_VER_PAD))
+            filename = IMAGES[CARD_VAL_GRID[i[0]][i[1]]]
+            image = pygame.image.load(filename)
+            DISPLAY.blit(image, (CARD_GRID[i[0]][i[1]].x, CARD_GRID[i[0]][i[1]].y))
+            # text = str(CARD_VAL_GRID[i[0]][i[1]])
+            # render = ARIAL_50.render(text, True, GREEN)
+            # DISPLAY.blit(render, (CARD_GRID[i[0]][i[1]].x + CARD_HOR_PAD, CARD_GRID[i[0]][i[1]].y + CARD_VER_PAD))
 
     if wrong:
         for i in wrong:
-            text = str(CARD_VAL_GRID[i[0]][i[1]])
-            render = ARIAL_50.render(text, True, RED)
-            DISPLAY.blit(render, (CARD_GRID[i[0]][i[1]].x + CARD_HOR_PAD, CARD_GRID[i[0]][i[1]].y + CARD_VER_PAD))
+            filename = IMAGES[CARD_VAL_GRID[i[0]][i[1]]]
+            image = pygame.image.load(filename)
+            DISPLAY.blit(image, (CARD_GRID[i[0]][i[1]].x, CARD_GRID[i[0]][i[1]].y))
+            # text = str(CARD_VAL_GRID[i[0]][i[1]])
+            # render = ARIAL_50.render(text, True, RED)
+            # DISPLAY.blit(render, (CARD_GRID[i[0]][i[1]].x + CARD_HOR_PAD, CARD_GRID[i[0]][i[1]].y + CARD_VER_PAD))
 
     #Draw other stuff
     title = ARIAL_35.render("Memory", True, WHITE)
